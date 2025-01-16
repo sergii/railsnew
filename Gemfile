@@ -61,3 +61,5 @@ group :test do
   gem "capybara"
   gem "cuprite"
 end
+
+gem "css-zero", "~> 0.0.92"
