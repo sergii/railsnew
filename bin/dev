@@ -1,68 +1,19 @@
-#!/usr/bin/env ruby
-require 'yaml'
+#!/bin/bash
 
-DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+# Define paths
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SERVICES_SCRIPT="$SCRIPT_DIR/services"
 
-def command_exists?(command)
-  system("command -v #{command} > /dev/null 2>&1")
-end
+# Check if bin/services exists and is executable
+if [[ ! -x "$SERVICES_SCRIPT" ]]; then
+  echo "Error: $SERVICES_SCRIPT not found or not executable."
+  exit 1
+fi
 
-def check_docker_and_compose
-  unless command_exists?("docker")
-    puts "Docker is not installed. Please install Docker and try again."
-    exit(1)
-  end
+# Ensure services are up using bin/services
+"$SERVICES_SCRIPT" up -d
 
-  unless command_exists?("docker-compose")
-    puts "Docker Compose is not installed. Please install Docker Compose and try again."
-    exit(1)
-  end
-end
-
-def available_services
-  unless File.exist?(DOCKER_COMPOSE_FILE)
-    puts "Error: #{DOCKER_COMPOSE_FILE} not found."
-    exit(1)
-  end
-
-  yaml = YAML.load_file(DOCKER_COMPOSE_FILE)
-  yaml['services'].keys
-rescue StandardError => e
-  puts "Error reading #{DOCKER_COMPOSE_FILE}: #{e.message}"
-  exit(1)
-end
-
-def check_and_start_services
-  services = available_services
-  running_services = `docker-compose ps --services --filter "status=running"`.strip.split
-
-  if running_services.empty?
-    puts "Docker Compose services are not running."
-    print "Available services: #{services.join(', ')}\n"
-    print "Would you like to start all services in detached mode? (y/n, press Enter for yes): "
-    answer = gets.chomp.downcase
-
-    if answer.empty? || answer == "y"
-      puts "Starting Docker Compose services in detached mode..."
-      system("docker-compose up -d")
-      unless $?.success?
-        puts "Failed to start services. Please check your Docker Compose setup."
-        exit(1)
-      end
-      puts "Services have started successfully."
-    else
-      puts "Exiting without starting services."
-      exit(1)
-    end
-  else
-    puts "Docker Compose services already running: #{running_services.join(', ')}"
-  end
-end
-
-# Main logic
-check_docker_and_compose
-check_and_start_services
-
-# Start the Rails server
-puts "Starting Rails server..."
-exec "./bin/rails", "server", *ARGV
+# Start the Rails server with any passed arguments
+echo "Starting Rails server..."
+trap 'echo "Stopping services..."; "$SERVICES_SCRIPT" down' INT
+bin/rails server "$@"
