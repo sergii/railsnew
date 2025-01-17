@@ -1,2 +1,51 @@
 #!/usr/bin/env ruby
+
+def command_exists?(command)
+  system("command -v #{command} > /dev/null 2>&1")
+end
+
+def check_docker_and_compose
+  unless command_exists?("docker")
+    puts "Docker is not installed. Please install Docker and try again."
+    exit(1)
+  end
+
+  unless command_exists?("docker-compose")
+    puts "Docker Compose is not installed. Please install Docker Compose and try again."
+    exit(1)
+  end
+end
+
+def check_and_start_services
+  running_services = `docker-compose ps --services --filter "status=running"`.strip
+
+  if running_services.empty?
+    puts "Docker Compose services are not running."
+    print "Would you like to start services in detached mode? (y/n, press Enter for yes): "
+    answer = gets.chomp.downcase
+
+    # Default to "yes" if Enter is pressed
+    if answer.empty? || answer == "y"
+      puts "Starting Docker Compose services in detached mode..."
+      system("docker-compose up -d")
+      unless $?.success?
+        puts "Failed to start services. Please check your Docker Compose setup."
+        exit(1)
+      end
+      puts "Services have started successfully."
+    else
+      puts "Exiting without starting services."
+      exit(1)
+    end
+  else
+    puts "Docker Compose services are already running: #{running_services.split.join(', ')}"
+  end
+end
+
+# Main logic
+check_docker_and_compose
+check_and_start_services
+
+# Start the Rails server
+puts "Starting Rails server..."
 exec "./bin/rails", "server", *ARGV
