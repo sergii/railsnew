@@ -1,65 +1,132 @@
 #!/bin/bash
 
-# Default to "all" if no service is specified
-SERVICE=${2:-all}
+# Define paths
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+APP_ROOT=$(dirname "$SCRIPT_DIR")
+DOCKER_COMPOSE_FILE="$APP_ROOT/docker-compose.yml"
 
-# Check if no arguments are provided or if --help/-h is passed
-if [[ -z "$1" || "$1" == "--help" || "$1" == "-h" ]]; then
+# Function to check if a command exists
+command_exists() {
+  command -v "$1" > /dev/null 2>&1
+}
+
+# Function to get available services from the docker-compose.yml file
+available_services() {
+  if [[ ! -f $DOCKER_COMPOSE_FILE ]]; then
+    echo "Error: $DOCKER_COMPOSE_FILE not found."
+    exit 1
+  fi
+
+  # Extract service names from the docker-compose.yml file
+  grep -E '^\s{2}[a-zA-Z0-9_-]+:' $DOCKER_COMPOSE_FILE | sed 's/://g' | xargs
+}
+
+# Function to show help message
+show_help() {
   echo "Usage:"
   echo "  bin/services up [-d]                 - Start all services in attached or detached (daemon) mode"
   echo "  bin/services up SERVICE [-d]         - Start a specific service in attached or detached (daemon) mode"
   echo "  bin/services down                    - Stop all services"
   echo "  bin/services restart [SERVICE|all]   - Restart all or a specific service"
+  echo "  bin/services known                   - List all available services"
   echo "  bin/services --help or -h            - Show this help message"
-  exit 0
+}
+
+# Check if Docker and Docker Compose are installed
+if ! command_exists docker; then
+  echo "Docker is not installed. Please install Docker and try again."
+  exit 1
 fi
 
-# Main commands
+if ! command_exists docker-compose; then
+  echo "Docker Compose is not installed. Please install Docker Compose and try again."
+  exit 1
+fi
+
+# Get the list of available services
+SERVICES=$(available_services)
+
+# Function to check if a service exists in the list of available services
+service_exists() {
+  local service="$1"
+  for s in $SERVICES; do
+    if [[ "$s" == "$service" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+# Handle commands
 case "$1" in
   up)
-    RUNNING=$(docker-compose ps --services --filter "status=running")
+    SERVICE=${2:-all}
+    DETACHED=false
 
+    # Check for -d flag
     if [[ "$SERVICE" == "-d" ]]; then
-      if [[ -n "$RUNNING" ]]; then
-        echo "All services are already running in detached (daemon) mode."
-        exit 0
-      fi
-      echo "Starting all services in detached (daemon) mode..."
-      docker-compose up -d
+      SERVICE="all"
+      DETACHED=true
     elif [[ "$3" == "-d" ]]; then
-      if [[ "$RUNNING" == *"$SERVICE"* ]]; then
-        echo "Service '$SERVICE' is already running in detached (daemon) mode."
-        exit 0
+      DETACHED=true
+    fi
+
+    # Validate the service
+    if [[ "$SERVICE" != "all" ]]; then
+      if ! service_exists "$SERVICE"; then
+        echo "Error: no such service: '$SERVICE' found in $(realpath $DOCKER_COMPOSE_FILE)."
+        echo "Available services: $SERVICES"
+        exit 1
       fi
-      echo "Starting $SERVICE service in detached (daemon) mode..."
-      docker-compose up -d "$SERVICE"
-    elif [[ "$SERVICE" == "all" ]]; then
-      echo "Starting all services in attached mode..."
-      docker-compose up
+    fi
+
+    if $DETACHED; then
+      if [[ "$SERVICE" == "all" ]]; then
+        echo "Starting all services in detached (daemon) mode..."
+        docker-compose -f "$DOCKER_COMPOSE_FILE" up -d
+      else
+        echo "Starting $SERVICE service in detached (daemon) mode..."
+        docker-compose -f "$DOCKER_COMPOSE_FILE" up -d "$SERVICE"
+      fi
     else
-      echo "Starting $SERVICE service in attached mode..."
-      docker-compose up "$SERVICE"
+      if [[ "$SERVICE" == "all" ]]; then
+        echo "Starting all services in attached mode..."
+        docker-compose -f "$DOCKER_COMPOSE_FILE" up
+      else
+        echo "Starting $SERVICE service in attached mode..."
+        docker-compose -f "$DOCKER_COMPOSE_FILE" up "$SERVICE"
+      fi
     fi
     ;;
   down)
-    # Check if any services are running
-    RUNNING=$(docker-compose ps --services --filter "status=running")
+    RUNNING=$(docker-compose -f "$DOCKER_COMPOSE_FILE" ps --services --filter "status=running")
     if [[ -z "$RUNNING" ]]; then
       echo "Nothing to stop. No services are running."
     else
       echo "Stopping all services..."
-      docker-compose down
+      docker-compose -f "$DOCKER_COMPOSE_FILE" down
       echo "All services have been stopped."
     fi
     ;;
   restart)
+    SERVICE=${2:-all}
     if [[ "$SERVICE" == "all" ]]; then
       echo "Restarting all services..."
-      docker-compose restart
-    else
+      docker-compose -f "$DOCKER_COMPOSE_FILE" restart
+    elif service_exists "$SERVICE"; then
       echo "Restarting $SERVICE service..."
-      docker-compose restart "$SERVICE"
+      docker-compose -f "$DOCKER_COMPOSE_FILE" restart "$SERVICE"
+    else
+      echo "Error: no such service: '$SERVICE' found in $(realpath $DOCKER_COMPOSE_FILE)."
+      echo "Available services: $SERVICES"
+      exit 1
     fi
+    ;;
+  known)
+    echo "Available services: $SERVICES"
+    ;;
+  --help|-h)
+    show_help
     ;;
   *)
     echo "Invalid command. Use 'bin/services --help' or 'bin/services -h' for usage."
