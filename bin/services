@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Default to "all" if no service is specified
+SERVICE=${2:-all}
+
+# Check if no arguments are provided or if --help/-h is passed
+if [[ -z "$1" || "$1" == "--help" || "$1" == "-h" ]]; then
+  echo "Usage:"
+  echo "  bin/services up [-d]                 - Start all services in attached or detached (daemon) mode"
+  echo "  bin/services up SERVICE [-d]         - Start a specific service in attached or detached (daemon) mode"
+  echo "  bin/services down                    - Stop all services"
+  echo "  bin/services restart [SERVICE|all]   - Restart all or a specific service"
+  echo "  bin/services --help or -h            - Show this help message"
+  exit 0
+fi
+
+# Main commands
+case "$1" in
+  up)
+    RUNNING=$(docker-compose ps --services --filter "status=running")
+
+    if [[ "$SERVICE" == "-d" ]]; then
+      if [[ -n "$RUNNING" ]]; then
+        echo "All services are already running in detached (daemon) mode."
+        exit 0
+      fi
+      echo "Starting all services in detached (daemon) mode..."
+      docker-compose up -d
+    elif [[ "$3" == "-d" ]]; then
+      if [[ "$RUNNING" == *"$SERVICE"* ]]; then
+        echo "Service '$SERVICE' is already running in detached (daemon) mode."
+        exit 0
+      fi
+      echo "Starting $SERVICE service in detached (daemon) mode..."
+      docker-compose up -d "$SERVICE"
+    elif [[ "$SERVICE" == "all" ]]; then
+      echo "Starting all services in attached mode..."
+      docker-compose up
+    else
+      echo "Starting $SERVICE service in attached mode..."
+      docker-compose up "$SERVICE"
+    fi
+    ;;
+  down)
+    # Check if any services are running
+    RUNNING=$(docker-compose ps --services --filter "status=running")
+    if [[ -z "$RUNNING" ]]; then
+      echo "Nothing to stop. No services are running."
+    else
+      echo "Stopping all services..."
+      docker-compose down
+      echo "All services have been stopped."
+    fi
+    ;;
+  restart)
+    if [[ "$SERVICE" == "all" ]]; then
+      echo "Restarting all services..."
+      docker-compose restart
+    else
+      echo "Restarting $SERVICE service..."
+      docker-compose restart "$SERVICE"
+    fi
+    ;;
+  *)
+    echo "Invalid command. Use 'bin/services --help' or 'bin/services -h' for usage."
+    exit 1
+    ;;
+esac
