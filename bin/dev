@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+require 'yaml'
+
+DOCKER_COMPOSE_FILE = 'docker-compose.yml'
 
 def command_exists?(command)
   system("command -v #{command} > /dev/null 2>&1")
@@ -16,15 +19,29 @@ def check_docker_and_compose
   end
 end
 
+def available_services
+  unless File.exist?(DOCKER_COMPOSE_FILE)
+    puts "Error: #{DOCKER_COMPOSE_FILE} not found."
+    exit(1)
+  end
+
+  yaml = YAML.load_file(DOCKER_COMPOSE_FILE)
+  yaml['services'].keys
+rescue StandardError => e
+  puts "Error reading #{DOCKER_COMPOSE_FILE}: #{e.message}"
+  exit(1)
+end
+
 def check_and_start_services
-  running_services = `docker-compose ps --services --filter "status=running"`.strip
+  services = available_services
+  running_services = `docker-compose ps --services --filter "status=running"`.strip.split
 
   if running_services.empty?
     puts "Docker Compose services are not running."
-    print "Would you like to start services in detached mode? (y/n, press Enter for yes): "
+    print "Available services: #{services.join(', ')}\n"
+    print "Would you like to start all services in detached mode? (y/n, press Enter for yes): "
     answer = gets.chomp.downcase
 
-    # Default to "yes" if Enter is pressed
     if answer.empty? || answer == "y"
       puts "Starting Docker Compose services in detached mode..."
       system("docker-compose up -d")
@@ -38,7 +55,7 @@ def check_and_start_services
       exit(1)
     end
   else
-    puts "Docker Compose services are already running: #{running_services.split.join(', ')}"
+    puts "Docker Compose services already running: #{running_services.join(', ')}"
   end
 end
 
