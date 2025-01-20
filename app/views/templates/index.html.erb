@@ -1,0 +1,19 @@
+<% if notice.present? %>
+  <div popover class="flash" style="--flash-position: 5rem;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= notice %></div>
+<% end %>
+
+<% content_for :title, "Templates" %>
+
+<div class="flex items-center justify-between mbe-4">
+  <h1 class="font-bold text-4xl">Templates</h1>
+  <%= link_to "New template", new_template_path, class: "btn btn--primary" %>
+</div>
+
+<div id="templates" class="flex flex-col" style="gap: 2rem;">
+  <% @templates.each do |template| %>
+    <div class="flex flex-col items-start gap">
+      <%= render template %>
+      <%= link_to "Show this template", template, class: "btn" %>
+    </div>
+  <% end %>
+</div>

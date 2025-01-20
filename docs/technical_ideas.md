@@ -1,10 +1,22 @@
-bin/rails generate model Application \
+rails generate scaffold Template \
   name:string \
-  slug:string:unique \
+  slug:string:uniq \
+  path:string \
+  description:text
+
+rails generate scaffold GeneratorOption \
+  name:string:uniq \
+  slug:string:uniq \
+  options:jsonb \
+  template:references
+
+rails generate scaffold Application \
+  name:string \
+  slug:string:uniq \
   rails_version:string \
-  parameters:jsonb \
   repository_url:string \
-  status:string:default:"draft" \
+  status:string \
+  generator_option:references \
   template:references
 
 
@@ -12,8 +24,7 @@ IDEA: you should use PostgreSQL if you want to use:
 - PostgreSQL extensions: PostGIS....
 - logidze gem
 - JSONb indexing
-
-
+- Add using of Raisl Actions (http://localhost:3000/rails/actions)
 
 
 # DOCKER

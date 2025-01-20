@@ -1,0 +1,10 @@
+<% content_for :title, "Editing template" %>
+
+<h1 class="font-bold text-4xl mbe-4">Editing template</h1>
+
+<%= render "form", template: @template %>
+
+<div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
+  <%= link_to "Show this template", @template, class: "btn" %>
+  <%= link_to "Back to templates", templates_path, class: "btn" %>
+</div>

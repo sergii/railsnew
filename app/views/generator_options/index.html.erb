@@ -1,0 +1,19 @@
+<% if notice.present? %>
+  <div popover class="flash" style="--flash-position: 5rem;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= notice %></div>
+<% end %>
+
+<% content_for :title, "Generator options" %>
+
+<div class="flex items-center justify-between mbe-4">
+  <h1 class="font-bold text-4xl">Generator options</h1>
+  <%= link_to "New generator option", new_generator_option_path, class: "btn btn--primary" %>
+</div>
+
+<div id="generator_options" class="flex flex-col" style="gap: 2rem;">
+  <% @generator_options.each do |generator_option| %>
+    <div class="flex flex-col items-start gap">
+      <%= render generator_option %>
+      <%= link_to "Show this generator option", generator_option, class: "btn" %>
+    </div>
+  <% end %>
+</div>

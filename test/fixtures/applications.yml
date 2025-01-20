@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  slug: MyString
+  rails_version: MyString
+  repository_url: MyString
+  status: MyString
+  generator_option: one
+  template: one
+
+two:
+  name: MyString
+  slug: MyString
+  rails_version: MyString
+  repository_url: MyString
+  status: MyString
+  generator_option: two
+  template: two

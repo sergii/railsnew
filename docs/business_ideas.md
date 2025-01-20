@@ -7,5 +7,4 @@
 4. Make possible create Rails app on the fly in the Docker container, and:
   - Donwload it as .zip file
   - Create GitHub repository and point project to it.
-
-
+5. Add scaffold generators with proper fields at the beginning (for Rails 8)
