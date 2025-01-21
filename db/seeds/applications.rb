@@ -10,7 +10,7 @@ applications = [
     repository_url: 'https://github.com/username/rails_8_0_0_minimal_app',
     status: 'active',
     generator_option_slug: "generator_options_minimal",
-    template_slug: "minimum_template"
+    template_slug: "minimal_template"
   },
   {
     rails_version: '8.0.0',

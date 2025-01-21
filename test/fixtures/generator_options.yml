@@ -1,6 +1,7 @@
 ---
-generatoroption_1:
-  name: Default '--minimum' options
+generator_options_minimal:
+  id: 1
+  name: Default '--minimal' options
   slug: generator_options_minimal
   options:
     database: postgresql
@@ -9,9 +10,10 @@ generatoroption_1:
   description: Rails 8.0.0 minimal app with defaults in order to try the in-build
     functionality
   template_id: 1
-  created_at: '2025-01-21 15:08:37'
-  updated_at: '2025-01-21 15:08:37'
-generatoroption_2:
+  created_at: '2025-01-21 15:58:54'
+  updated_at: '2025-01-21 15:58:54'
+generator_options_api:
+  id: 2
   name: Default '--api' options
   slug: generator_options_api
   options:
@@ -21,5 +23,5 @@ generatoroption_2:
   description: Rails 8.0.0 API mode app with defaults in order to try the in-build
     functionality
   template_id: 2
-  created_at: '2025-01-21 15:08:38'
-  updated_at: '2025-01-21 15:08:38'
+  created_at: '2025-01-21 15:58:54'
+  updated_at: '2025-01-21 15:58:54'

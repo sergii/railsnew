@@ -2,7 +2,7 @@ require "test_helper"
 
 class GeneratorOptionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @generator_option = generator_options(:one)
+    @generator_option = generator_options(:generator_options_minimal)
   end
 
   test "should get index" do

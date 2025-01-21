@@ -3,10 +3,10 @@ puts "Seeding templates..."
 
 templates = [
   {
-    name: 'rails new --minimum template',
-    slug: 'minimum_template',
-    path: 'templates/minimum',
-    description: 'A standard template with --minimum configuration.'
+    name: 'rails new --minimal template',
+    slug: 'minimal_template',
+    path: 'templates/minimal',
+    description: 'A standard template with --minimal configuration.'
   },
   {
     name: 'rails new --api template',

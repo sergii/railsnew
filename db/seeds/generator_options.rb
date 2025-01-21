@@ -3,7 +3,7 @@ puts "Seeding generator options..."
 
 generator_options = [
   {
-    name: "Default '--minimum' options",
+    name: "Default '--minimal' options",
     slug: 'generator_options_minimal',
     options: {
       database: 'postgresql',
@@ -11,7 +11,7 @@ generator_options = [
       javascript_bundler: 'esbuild'
     },
     description: "Rails 8.0.0 minimal app with defaults in order to try the in-build functionality",
-    template_slug: 'minimum_template'
+    template_slug: 'minimal_template'
   },
   {
     name: "Default '--api' options",

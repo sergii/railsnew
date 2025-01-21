@@ -29,13 +29,13 @@ module FixtureGenerator
       puts "Found #{total_records} #{model_name} record(s) in the database."
 
       model_class.find_each.with_index(1) do |record, index|
-        cleaned_attributes = record.attributes.except("id").merge(
+        cleaned_attributes = record.attributes.merge(
           "created_at" => record.created_at.strftime('%Y-%m-%d %H:%M:%S'),
           "updated_at" => record.updated_at.strftime('%Y-%m-%d %H:%M:%S')
         )
 
         file.puts({
-          "#{model_name.downcase}_#{record.id}" => cleaned_attributes
+          record.slug => cleaned_attributes
         }.to_yaml.sub(/^---\s*/, ''))
 
         puts "Processed #{model_name} ##{index} (ID: #{record.id})"

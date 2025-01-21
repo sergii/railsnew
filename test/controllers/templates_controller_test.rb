@@ -2,7 +2,7 @@ require "test_helper"
 
 class TemplatesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @template = templates(:one)
+    @template = templates(:minimal_template)
   end
 
   test "should get index" do

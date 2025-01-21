@@ -1,15 +1,17 @@
 ---
-template_1:
-  name: rails new --minimum template
-  slug: minimum_template
-  path: templates/minimum
-  description: A standard template with --minimum configuration.
-  created_at: '2025-01-21 15:08:37'
-  updated_at: '2025-01-21 15:08:37'
-template_2:
+minimal_template:
+  id: 1
+  name: rails new --minimal template
+  slug: minimal_template
+  path: templates/minimal
+  description: A standard template with --minimal configuration.
+  created_at: '2025-01-21 15:58:54'
+  updated_at: '2025-01-21 15:58:54'
+api_template:
+  id: 2
   name: rails new --api template
   slug: api_template
   path: templates/api
   description: A template optimized for API-only applications.
-  created_at: '2025-01-21 15:08:37'
-  updated_at: '2025-01-21 15:08:37'
+  created_at: '2025-01-21 15:58:54'
+  updated_at: '2025-01-21 15:58:54'

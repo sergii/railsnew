@@ -1,5 +1,6 @@
 ---
-application_1:
+rails_8_0_0_minimal_app:
+  id: 1
   rails_version: 8.0.0
   name: Rails 8.0.0 minimal app
   slug: rails_8_0_0_minimal_app
@@ -9,9 +10,10 @@ application_1:
   status: active
   generator_option_id: 1
   template_id: 1
-  created_at: '2025-01-21 15:08:38'
-  updated_at: '2025-01-21 15:08:38'
-application_2:
+  created_at: '2025-01-21 15:58:54'
+  updated_at: '2025-01-21 15:58:54'
+rails_8_0_0_api_app:
+  id: 2
   rails_version: 8.0.0
   name: Rails 8.0.0 API app
   slug: rails_8_0_0_api_app
@@ -21,5 +23,5 @@ application_2:
   status: active
   generator_option_id: 2
   template_id: 2
-  created_at: '2025-01-21 15:08:38'
-  updated_at: '2025-01-21 15:08:38'
+  created_at: '2025-01-21 15:58:54'
+  updated_at: '2025-01-21 15:58:54'
