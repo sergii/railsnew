@@ -1,13 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  slug: MyString
-  options: 
-  template: one
+  name: API
+  slug: api
+  options: --api
+  description: Preconfigure rails app in API mode
+  template: 1
 
 two:
-  name: MyString
-  slug: MyString
-  options: 
-  template: two
+  name: Minimal
+  slug: minimal
+  options: "--minimal" # double quotes test
+  description: Preconfigure a minimal rails app
+  template: 2

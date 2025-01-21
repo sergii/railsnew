@@ -17,7 +17,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create application" do
     assert_difference("Application.count") do
-      post applications_url, params: { application: { generator_option_id: @application.generator_option_id, name: @application.name, rails_version: @application.rails_version, repository_url: @application.repository_url, slug: @application.slug, status: @application.status, template_id: @application.template_id } }
+      post applications_url, params: { application: { generator_option_id: @application.generator_option_id, rails_version: @application.rails_version, name: @application.name, description: @application.description, repository_url: @application.repository_url, slug: @application.slug, status: @application.status, template_id: @application.template_id } }
     end
 
     assert_redirected_to application_url(Application.last)
@@ -34,7 +34,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update application" do
-    patch application_url(@application), params: { application: { generator_option_id: @application.generator_option_id, name: @application.name, rails_version: @application.rails_version, repository_url: @application.repository_url, slug: @application.slug, status: @application.status, template_id: @application.template_id } }
+    patch application_url(@application), params: { application: { generator_option_id: @application.generator_option_id, rails_version: @application.rails_version, name: @application.name, description: @application.description, repository_url: @application.repository_url, slug: @application.slug, status: @application.status, template_id: @application.template_id } }
     assert_redirected_to application_url(@application)
   end
 

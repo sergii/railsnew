@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  slug: MyString
-  rails_version: MyString
-  repository_url: MyString
-  status: MyString
-  generator_option: one
-  template: one
+  name: API
+  slug: api
+  rails_version: 8.0.1
+  repository_url: https://github.com/username/reponame
+  status: draft
+  generator_option: 1
+  template: 1
 
 two:
-  name: MyString
-  slug: MyString
-  rails_version: MyString
-  repository_url: MyString
-  status: MyString
-  generator_option: two
-  template: two
+  name: Minimal
+  slug: minimal
+  rails_version: 8.0.1
+  repository_url: https://github.com/username/reponame
+  status: draft
+  generator_option: 2
+  template: 2

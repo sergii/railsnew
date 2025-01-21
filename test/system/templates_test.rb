@@ -14,8 +14,8 @@ class TemplatesTest < ApplicationSystemTestCase
     visit templates_url
     click_on "New template"
 
-    fill_in "Description", with: @template.description
     fill_in "Name", with: @template.name
+    fill_in "Description", with: @template.description
     fill_in "Path", with: @template.path
     fill_in "Slug", with: @template.slug
     click_on "Create Template"
@@ -28,8 +28,8 @@ class TemplatesTest < ApplicationSystemTestCase
     visit template_url(@template)
     click_on "Edit this template", match: :first
 
-    fill_in "Description", with: @template.description
     fill_in "Name", with: @template.name
+    fill_in "Description", with: @template.description
     fill_in "Path", with: @template.path
     fill_in "Slug", with: @template.slug
     click_on "Update Template"

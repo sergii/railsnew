@@ -1,15 +1,16 @@
+puts ""
 puts "Seeding templates..."
 
 templates = [
   {
-    name: 'Standard Template',
-    slug: 'standard-template',
-    path: 'templates/standard',
-    description: 'A standard template with default configurations.'
+    name: 'rails new --minimum template',
+    slug: 'minimum_template',
+    path: 'templates/minimum',
+    description: 'A standard template with --minimum configuration.'
   },
   {
-    name: 'API Template',
-    slug: 'api-template',
+    name: 'rails new --api template',
+    slug: 'api_template',
     path: 'templates/api',
     description: 'A template optimized for API-only applications.'
   }

@@ -15,8 +15,9 @@ class GeneratorOptionsTest < ApplicationSystemTestCase
     click_on "New generator option"
 
     fill_in "Name", with: @generator_option.name
-    fill_in "Options", with: @generator_option.options
     fill_in "Slug", with: @generator_option.slug
+    fill_in "Options", with: @generator_option.options
+    fill_in "Description", with: @generator_option.description
     fill_in "Template", with: @generator_option.template_id
     click_on "Create Generator option"
 
@@ -29,8 +30,9 @@ class GeneratorOptionsTest < ApplicationSystemTestCase
     click_on "Edit this generator option", match: :first
 
     fill_in "Name", with: @generator_option.name
-    fill_in "Options", with: @generator_option.options
     fill_in "Slug", with: @generator_option.slug
+    fill_in "Options", with: @generator_option.options
+    fill_in "Description", with: @generator_option.description
     fill_in "Template", with: @generator_option.template_id
     click_on "Update Generator option"
 

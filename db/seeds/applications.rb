@@ -1,24 +1,27 @@
+puts ""
 puts "Seeding applications..."
 
 applications = [
   {
-    name: 'My First App',
-    slug: 'my-first-app',
     rails_version: '8.0.0',
-    repository_url: 'https://github.com/sergii/my-first-app',
+    name: 'Rails 8.0.0 minimal app',
+    slug: 'rails_8_0_0_minimal_app',
+    description: "Rails 8.0.0 minimal app with defaults in order to try the in-build functionality",
+    repository_url: 'https://github.com/username/rails_8_0_0_minimal_app',
     status: 'active',
-    generator_option_slug: 'default-options',
-    template_slug: 'standard-template'
+    generator_option_slug: "generator_options_minimal",
+    template_slug: "minimum_template"
   },
   {
-    name: 'API Service',
-    slug: 'api-service',
     rails_version: '8.0.0',
-    repository_url: 'https://github.com/sergii/api-service',
-    status: 'draft',
-    generator_option_slug: 'api-options',
-    template_slug: 'api-template'
-  }
+    name: 'Rails 8.0.0 API app',
+    slug: 'rails_8_0_0_api_app',
+    description: "Rails 8.0.0 app in API mode with defaults in order to try the in-build functionality",
+    repository_url: 'https://github.com/username/rails_8_0_0_api_app',
+    status: 'active',
+    generator_option_slug: "generator_options_api",
+    template_slug: "api_template"
+  },
 ]
 
 applications.each do |app|
@@ -27,8 +30,9 @@ applications.each do |app|
 
   if generator_option && template
     created = Application.find_or_create_by!(slug: app[:slug]) do |a|
-      a.name = app[:name]
       a.rails_version = app[:rails_version]
+      a.name = app[:name]
+      a.description = app[:description]
       a.repository_url = app[:repository_url]
       a.status = app[:status]
       a.generator_option = generator_option
@@ -37,7 +41,7 @@ applications.each do |app|
 
     puts "  - #{created.name} (#{created.slug}) linked to generator option #{generator_option.name} and template #{template.name}"
   else
-    puts "  - Skipped: Missing generator option or template for application #{app[:name]}"
+    puts "  - Skipped: Missing generator option or template for application #{app[:slug]}"
   end
 end
 

@@ -1,25 +1,28 @@
+puts ""
 puts "Seeding generator options..."
 
 generator_options = [
   {
-    name: 'Default Options',
-    slug: 'default-options',
+    name: "Default '--minimum' options",
+    slug: 'generator_options_minimal',
     options: {
       database: 'postgresql',
       css_framework: 'tailwind',
       javascript_bundler: 'esbuild'
     },
-    template_slug: 'standard-template'
+    description: "Rails 8.0.0 minimal app with defaults in order to try the in-build functionality",
+    template_slug: 'minimum_template'
   },
   {
-    name: 'API Options',
-    slug: 'api-options',
+    name: "Default '--api' options",
+    slug: 'generator_options_api',
     options: {
       database: 'mysql',
       skip_javascript: true,
       api_mode: true
     },
-    template_slug: 'api-template'
+    description: "Rails 8.0.0 API mode app with defaults in order to try the in-build functionality",
+    template_slug: 'api_template'
   }
 ]
 
@@ -29,6 +32,7 @@ generator_options.each do |gen_option|
     created = GeneratorOption.find_or_create_by!(slug: gen_option[:slug]) do |go|
       go.name = gen_option[:name]
       go.options = gen_option[:options]
+      go.description = gen_option[:description]
       go.template = template
     end
 

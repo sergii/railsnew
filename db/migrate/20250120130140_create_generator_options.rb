@@ -4,6 +4,7 @@ class CreateGeneratorOptions < ActiveRecord::Migration[8.0]
       t.string :name, null: false
       t.string :slug, null: false
       t.jsonb :options, null: false, default: {}
+      t.text :description
       t.references :template, null: false, foreign_key: true
 
       t.timestamps

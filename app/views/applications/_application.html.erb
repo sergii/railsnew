@@ -1,5 +1,9 @@
 <div id="<%= dom_id application %>" class="flex flex-col gap">
   <div class="flex flex-col gap-half">
+    <h4 class="font-medium leading-none">Rails version:</h4>
+    <p class="leading-none"><%= application.rails_version %></p>
+  </div>
+  <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Name:</h4>
     <p class="leading-none"><%= application.name %></p>
   </div>
@@ -8,8 +12,8 @@
     <p class="leading-none"><%= application.slug %></p>
   </div>
   <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Rails version:</h4>
-    <p class="leading-none"><%= application.rails_version %></p>
+    <h4 class="font-medium leading-none">Slug:</h4>
+    <p class="leading-none"><%= application.description %></p>
   </div>
   <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Repository url:</h4>

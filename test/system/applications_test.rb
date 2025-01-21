@@ -15,10 +15,11 @@ class ApplicationsTest < ApplicationSystemTestCase
     click_on "New application"
 
     fill_in "Generator option", with: @application.generator_option_id
-    fill_in "Name", with: @application.name
     fill_in "Rails version", with: @application.rails_version
+    fill_in "Name", with: @application.name
     fill_in "Repository url", with: @application.repository_url
     fill_in "Slug", with: @application.slug
+    fill_in "Description", with: @application.description
     fill_in "Status", with: @application.status
     fill_in "Template", with: @application.template_id
     click_on "Create Application"
@@ -36,6 +37,7 @@ class ApplicationsTest < ApplicationSystemTestCase
     fill_in "Rails version", with: @application.rails_version
     fill_in "Repository url", with: @application.repository_url
     fill_in "Slug", with: @application.slug
+    fill_in "Description", with: @application.description
     fill_in "Status", with: @application.status
     fill_in "Template", with: @application.template_id
     click_on "Update Application"

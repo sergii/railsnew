@@ -15,9 +15,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_130146) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "applications", force: :cascade do |t|
+    t.string "rails_version", null: false
     t.string "name", null: false
     t.string "slug", null: false
-    t.string "rails_version", null: false
+    t.text "description"
     t.string "repository_url"
     t.string "status", default: "draft"
     t.bigint "generator_option_id", null: false
@@ -34,6 +35,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_130146) do
     t.string "name", null: false
     t.string "slug", null: false
     t.jsonb "options", default: {}, null: false
+    t.text "description"
     t.bigint "template_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
