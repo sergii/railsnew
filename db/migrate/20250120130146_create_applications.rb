@@ -7,8 +7,8 @@ class CreateApplications < ActiveRecord::Migration[8.0]
       t.text :description
       t.string :repository_url
       t.string :status, default: "draft"
-      t.references :generator_option, null: false, foreign_key: true
-      t.references :template, null: false, foreign_key: true
+      t.references :generator_option, foreign_key: true, null: true
+      t.references :template, foreign_key: true, null: true
 
       t.timestamps
     end

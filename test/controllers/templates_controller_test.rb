@@ -3,6 +3,12 @@ require "test_helper"
 class TemplatesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @template = templates(:minimal_template)
+    @valid_template_params = {
+      name: "Unique Template Name",
+      description: "This is a valid description",
+      path: "path/to/template",
+      slug: "unique_template_slug"
+    }
   end
 
   test "should get index" do
@@ -17,10 +23,12 @@ class TemplatesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create template" do
     assert_difference("Template.count") do
-      post templates_url, params: { template: { description: @template.description, name: @template.name, path: @template.path, slug: @template.slug } }
+      post templates_url, params: { template: @valid_template_params }
     end
 
     assert_redirected_to template_url(Template.last)
+    follow_redirect!
+    assert_match "Template was successfully created.", response.body
   end
 
   test "should show template" do

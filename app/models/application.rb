@@ -1,6 +1,6 @@
 class Application < ApplicationRecord
-  belongs_to :generator_option
-  belongs_to :template
+  belongs_to :generator_option, optional: true
+  belongs_to :template, optional: true
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true

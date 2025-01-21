@@ -1,6 +1,6 @@
 class GeneratorOption < ApplicationRecord
-  belongs_to :template
-  has_many :applications
+  belongs_to :template, optional: true
+  has_many :applications, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
   validates :slug, presence: true, uniqueness: true
