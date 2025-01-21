@@ -1,19 +1,25 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: API
-  slug: api
-  rails_version: 8.0.1
-  repository_url: https://github.com/username/reponame
-  status: draft
-  generator_option: 1
-  template: 1
-
-two:
-  name: Minimal
-  slug: minimal
-  rails_version: 8.0.1
-  repository_url: https://github.com/username/reponame
-  status: draft
-  generator_option: 2
-  template: 2
+---
+application_1:
+  rails_version: 8.0.0
+  name: Rails 8.0.0 minimal app
+  slug: rails_8_0_0_minimal_app
+  description: Rails 8.0.0 minimal app with defaults in order to try the in-build
+    functionality
+  repository_url: https://github.com/username/rails_8_0_0_minimal_app
+  status: active
+  generator_option_id: 1
+  template_id: 1
+  created_at: '2025-01-21 15:08:38'
+  updated_at: '2025-01-21 15:08:38'
+application_2:
+  rails_version: 8.0.0
+  name: Rails 8.0.0 API app
+  slug: rails_8_0_0_api_app
+  description: Rails 8.0.0 app in API mode with defaults in order to try the in-build
+    functionality
+  repository_url: https://github.com/username/rails_8_0_0_api_app
+  status: active
+  generator_option_id: 2
+  template_id: 2
+  created_at: '2025-01-21 15:08:38'
+  updated_at: '2025-01-21 15:08:38'

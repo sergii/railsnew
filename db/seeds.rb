@@ -11,3 +11,19 @@
 load Rails.root.join('db/seeds/templates.rb')
 load Rails.root.join('db/seeds/generator_options.rb')
 load Rails.root.join('db/seeds/applications.rb')
+
+
+if ENV['UPDATE_FIXTURES'] == 'true'
+  # Generate fixtures
+  require Rails.root.join('lib/tasks/fixture_generator.rb')
+
+  puts "Starting the seeding process..."
+
+  # Run the Rake task
+  puts "Calling the Rake task to generate fixtures..."
+  Rake::Task.clear # Clear any previously loaded tasks to avoid duplicate task invocation
+  Rails.application.load_tasks # Load the Rake tasks
+  Rake::Task["fixtures:generate"].invoke
+
+  puts "Finished generating fixtures!"
+end

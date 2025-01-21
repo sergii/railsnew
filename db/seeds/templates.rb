@@ -25,5 +25,3 @@ templates.each do |template|
 
   puts "  - #{created.name} (#{created.slug})"
 end
-
-puts "Templates seeding complete!"
