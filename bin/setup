@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# Sets up the project by installing dependencies and preparing the environment.
 require "fileutils"
 
 APP_ROOT = File.expand_path("..", __dir__)
@@ -8,6 +9,7 @@ def system!(*args)
 end
 
 FileUtils.chdir APP_ROOT do
+  puts "Setting up the project..."
   # This script is a way to set up or update your development environment automatically.
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
   # Add necessary setup steps to this file.

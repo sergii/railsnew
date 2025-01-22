@@ -1,4 +1,4 @@
-require Rails.root.join('lib/tasks/fixture_generator.rb')
+require Rails.root.join("lib/tasks/fixture_generator.rb")
 
 namespace :fixtures do
   desc "Generate fixtures for all models"

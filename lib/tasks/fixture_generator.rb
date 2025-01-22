@@ -1,4 +1,4 @@
-require 'fileutils'
+require "fileutils"
 
 # Example usage:
 #
@@ -30,13 +30,13 @@ module FixtureGenerator
 
       model_class.find_each.with_index(1) do |record, index|
         cleaned_attributes = record.attributes.merge(
-          "created_at" => record.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-          "updated_at" => record.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+          "created_at" => record.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+          "updated_at" => record.updated_at.strftime("%Y-%m-%d %H:%M:%S")
         )
 
         file.puts({
           record.slug => cleaned_attributes
-        }.to_yaml.sub(/^---\s*/, ''))
+        }.to_yaml.sub(/^---\s*/, ""))
 
         puts "Processed #{model_name} ##{index} (ID: #{record.id})"
       end

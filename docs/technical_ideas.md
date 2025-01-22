@@ -34,3 +34,8 @@ docker-compose exec db psql -U postgres -c "CREATE DATABASE railsnew_development
 Then, verify its existence:
 docker-compose exec db psql -U postgres -l
 
+# What files depends on DB type?
+- [x] .github/workflows/ci.yml
+- [x] config/database.yml
+- [ ] ....
+

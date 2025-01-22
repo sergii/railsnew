@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# A wrapper script to run Act with setup and cleanup steps.
+
+# Ensure Docker context for Act exists and is used
+if ! docker context inspect act-context > /dev/null 2>&1; then
+  echo "Create Docker context for Act..."
+  docker context create act-context
+fi
+echo "Use Docker context for Act..."
+docker context use act-context
+
+# Check if a job name is provided, and include -r by default
+if [[ -n "$1" ]]; then
+  echo "Running Act with job: $1 and --reuse (-r) flag"
+  act -r -j "$1" --container-options "--label act=true"
+else
+  echo "Running Act with --reuse (-r) flag"
+  act -r --container-options "--label act=true"
+fi
+
+# Cleanup Docker resources related to Act
+echo ""
+echo "Cleaning up Docker resources..."
+# docker system prune -f --filter "name=act"
+# docker volume prune -f --filter "name=act"
+docker ps -a --filter "label=act" -q | xargs -r docker rm -f
+docker ps -a --filter "name=act" -q | xargs -r docker rm -f
+
+docker volume ls --filter "label=act" -q | xargs -r docker volume rm
+docker volume ls --filter "name=act" -q | xargs -r docker volume rm
+
+docker network ls --filter "label=act" -q | xargs -r docker network rm
+docker network ls --filter "name=act" -q | xargs -r docker network rm
+
+echo "Cleanup complete."

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Runs the test suite.
+
+echo "Running tests..."
+# Test logic here

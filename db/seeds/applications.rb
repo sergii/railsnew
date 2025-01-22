@@ -21,7 +21,7 @@ applications = [
     status: 'active',
     generator_option_slug: "generator_options_api",
     template_slug: "api_template"
-  },
+  }
 ]
 
 applications.each do |app|

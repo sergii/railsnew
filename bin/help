@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# A help script to list all available bin scripts, their types, and explanations.
+
+echo "📜 Available commands in the bin/ directory:"
+echo
+
+for script in bin/*; do
+  if [[ -f "$script" && -x "$script" ]]; then
+    # Extract the first line (shebang) to determine the script type
+    shebang=$(head -n 1 "$script")
+
+    # Determine the type based on the shebang
+    if [[ $shebang == *"bash"* ]]; then
+      script_type="💻 Bash"
+    elif [[ $shebang == *"ruby"* ]]; then
+      script_type="🔴 Ruby"
+    else
+      script_type="❓ Unknown"
+    fi
+
+    # Extract the description from the script's comments (first comment block)
+    description=$(grep -m 1 "^# " "$script" | sed 's/^# //')
+
+    # Print the script name, type, and description
+    printf "📂 %-15s %s - %s\n" "$(basename "$script")" "[$script_type]" "$description"
+  fi
+done
+
+echo
+echo "✨ Run './bin/<script_name>' to execute a specific script."
