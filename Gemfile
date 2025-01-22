@@ -61,6 +61,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "cuprite"
+  gem "minitest-difftastic", "~> 0.1.0"
+  gem "pretty-diffs"
 end
 
 gem "css-zero", "~> 0.0.92"

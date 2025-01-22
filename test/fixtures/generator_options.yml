@@ -10,8 +10,8 @@ generator_options_minimal:
   description: Rails 8.0.0 minimal app with defaults in order to try the in-build
     functionality
   template_id: 1
-  created_at: '2025-01-21 22:47:25'
-  updated_at: '2025-01-21 22:47:25'
+  created_at: '2025-01-22 00:44:29'
+  updated_at: '2025-01-22 00:44:29'
 generator_options_api:
   id: 2
   name: Default '--api' options
@@ -23,5 +23,5 @@ generator_options_api:
   description: Rails 8.0.0 API mode app with defaults in order to try the in-build
     functionality
   template_id: 2
-  created_at: '2025-01-21 22:47:26'
-  updated_at: '2025-01-21 22:47:26'
+  created_at: '2025-01-22 00:44:29'
+  updated_at: '2025-01-22 00:44:29'

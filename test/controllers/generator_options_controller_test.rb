@@ -3,6 +3,12 @@ require "test_helper"
 class GeneratorOptionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @generator_option = generator_options(:generator_options_minimal)
+    @valid_generator_options_params = {
+      name: "Minimal rails app configuration",
+      options: "--minimal",
+      slug: "unique_generator_options_slug",
+      template_id: @generator_option.id
+    }
   end
 
   test "should get index" do
@@ -17,7 +23,7 @@ class GeneratorOptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create generator_option" do
     assert_difference("GeneratorOption.count") do
-      post generator_options_url, params: { generator_option: { name: @generator_option.name, options: @generator_option.options, slug: @generator_option.slug, template_id: @generator_option.template_id } }
+      post generator_options_url, params: { generator_option: @valid_generator_options_params }
     end
 
     assert_redirected_to generator_option_url(GeneratorOption.last)

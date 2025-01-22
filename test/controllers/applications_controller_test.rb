@@ -3,6 +3,16 @@ require "test_helper"
 class ApplicationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @application = applications(:rails_8_0_0_api_app)
+    @valid_application_params = {
+      generator_option_id: @application.generator_option_id,
+      rails_version: @application.rails_version,
+      name: "Rails minimal application",
+      description: "Rails application with --minimal flag option",
+      repository_url: "https://github.com/username/reponame",
+      slug: "rails_minimal_application",
+      status: "active",
+      template_id: @application.template_id
+    }
   end
 
   test "should get index" do
@@ -17,7 +27,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create application" do
     assert_difference("Application.count") do
-      post applications_url, params: { application: { generator_option_id: @application.generator_option_id, rails_version: @application.rails_version, name: @application.name, description: @application.description, repository_url: @application.repository_url, slug: @application.slug, status: @application.status, template_id: @application.template_id } }
+      post applications_url, params: { application: @valid_application_params }
     end
 
     assert_redirected_to application_url(Application.last)
