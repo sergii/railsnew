@@ -21,8 +21,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_130146) do
     t.text "description"
     t.string "repository_url"
     t.string "status", default: "draft"
-    t.bigint "generator_option_id", null: false
-    t.bigint "template_id", null: false
+    t.bigint "generator_option_id"
+    t.bigint "template_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["generator_option_id"], name: "index_applications_on_generator_option_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_130146) do
     t.string "slug", null: false
     t.jsonb "options", default: {}, null: false
     t.text "description"
-    t.bigint "template_id", null: false
+    t.bigint "template_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_generator_options_on_name", unique: true

@@ -5,13 +5,13 @@ minimal_template:
   slug: minimal_template
   path: templates/minimal
   description: A standard template with --minimal configuration.
-  created_at: '2025-01-22 00:44:29'
-  updated_at: '2025-01-22 00:44:29'
+  created_at: '2025-01-22 01:22:34'
+  updated_at: '2025-01-22 01:22:34'
 api_template:
   id: 2
   name: rails new --api template
   slug: api_template
   path: templates/api
   description: A template optimized for API-only applications.
-  created_at: '2025-01-22 00:44:29'
-  updated_at: '2025-01-22 00:44:29'
+  created_at: '2025-01-22 01:22:34'
+  updated_at: '2025-01-22 01:22:34'
