@@ -111,9 +111,9 @@ GEM
     debug (1.10.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    difftastic (0.0.1)
-    difftastic (0.0.1-x86_64-darwin)
-    difftastic (0.0.1-x86_64-linux)
+    difftastic (0.2.0)
+    difftastic (0.2.0-x86_64-darwin)
+    difftastic (0.2.0-x86_64-linux)
     diffy (3.4.3)
     dotenv (3.1.7)
     drb (2.2.1)
@@ -173,8 +173,8 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
-    minitest-difftastic (0.1.0)
-      difftastic (~> 0.0.1)
+    minitest-difftastic (0.1.2)
+      difftastic (~> 0.2)
     minitest-reporters (1.7.1)
       ansi
       builder
@@ -381,7 +381,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
-  minitest-difftastic (~> 0.1.0)
+  minitest-difftastic (~> 0.1.2)
   minitest-reporters
   pg (~> 1.5)
   pretty-diffs
