@@ -62,7 +62,7 @@ group :test do
   gem "capybara"
   gem "cuprite"
   gem "capybara-screenshot" # Optional, for debugging failed tests
-  gem "minitest-difftastic", "~> 0.1.0"
+  gem "minitest-difftastic", "~> 0.2.1"
   gem "pretty-diffs"
   gem "diffy", "~> 3.4"
 end
