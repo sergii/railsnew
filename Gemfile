@@ -67,4 +67,4 @@ group :test do
   gem "diffy", "~> 3.4"
 end
 
-gem "css-zero", "~> 0.0.92"
+gem "css-zero", "~> 1.1.4"
